@@ -9,9 +9,7 @@ set (CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 set (SOURCES
-    main.cpp
-    Network.cpp
-    Vector.cpp)
+    main.cpp)
 
 add_executable (mnist ${SOURCES})
 target_link_libraries (mnist)
