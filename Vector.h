@@ -5,31 +5,38 @@
 #include <functional>
 #include <iomanip>
 
+namespace detail {
+    template<size_t N, typename F, size_t ...Is>
+    inline auto fillImpl(F const &generator, std::index_sequence<Is...>) {
+        return std::array<double, N>{ generator(Is)... };
+    }
+
+    template<size_t N, typename F>
+    inline auto fill(F const &generator) {
+        return fillImpl<N>(generator, std::make_index_sequence<N>());
+    }
+}
+
 template<int Size>
 class Vector
 {
 private:
-    double _data[Size];
+    std::array<double, Size> _data;
 
 public:
-    Vector() {
-        memset(_data, 0, Size * sizeof(double));
-    }
+    Vector() {};
 
-    Vector(std::function<double (int)> const &generator) {
-        for (int i = 0; i < Size; i++) {
-            _data[i] = generator(i);
-        }
-    }
+    Vector(std::function<double (int)> const &generator)
+        : _data(detail::fill<Size>(generator)) {};
 
     constexpr int size() {
         return Size;
     }
 
-    void print() {
-        std::cout << std::setprecision(5) << '[' << std::endl;
-        for (int i = 0; i < Size; i++) {
-            std::cout << ' ' << _data[i] << ',' << std::endl;
+    void print() const {
+        std::cout << std::setprecision(4) << '[' << std::endl;
+        for (auto &d : _data) {
+            std::cout << "  " << std::setw(10) << d << ',' << std::endl;
         }
         std::cout << ']' << std::endl;
     }
