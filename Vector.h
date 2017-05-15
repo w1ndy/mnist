@@ -55,6 +55,16 @@ public:
         std::cout << ']' << std::endl;
     }
 
+    double &operator ()(size_t i) {
+        assert(i < Size && "vector.get: argument out of bound!");
+        return _data[i];
+    }
+
+    double const &operator ()(size_t i) const {
+        assert(i < Size && "vector.get: argument out of bound!");
+        return _data[i];
+    }
+
     Vector<Size> operator+(Vector<Size> const &v) const {
         Vector<Size> rv;
         for (int i = 0; i < Size; i++) {
