@@ -6,14 +6,17 @@
 #include <iomanip>
 #include <cassert>
 
-namespace detail {
+namespace detail
+{
     template<size_t N, typename F, size_t ...Is>
-    inline auto fillImpl(F const &generator, std::index_sequence<Is...>) {
+    inline auto fillImpl(F const &generator, std::index_sequence<Is...>)
+    {
         return std::array<double, N>{ generator(Is)... };
     }
 
     template<size_t N, typename F>
-    inline auto fill(F const &generator) {
+    inline auto fill(F const &generator)
+    {
         return fillImpl<N>(generator, std::make_index_sequence<N>());
     }
 }
@@ -32,7 +35,8 @@ public:
 
     Vector(std::array<double, Size> &&values) : _data(values) {};
 
-    Vector(std::initializer_list<double> const &values) {
+    Vector(std::initializer_list<double> const &values)
+    {
         size_t index = 0;
         for (auto const &p : values) {
             assert(index < Size && "initializer list out of bound");
@@ -43,29 +47,34 @@ public:
     Vector(Vector const &v) : _data(v._data) {};
     Vector(Vector const &&v) : _data(std::move(v._data)) {};
 
-    constexpr size_t size() {
+    constexpr size_t size()
+    {
         return Size;
     }
 
-    void print() const {
+    void print() const
+    {
         std::cout << std::setprecision(4) << '[' << std::endl;
-        for (auto &d : _data) {
+        for (auto &d : _data){
             std::cout << "  " << std::setw(10) << d << ',' << std::endl;
         }
         std::cout << ']' << std::endl;
     }
 
-    double &operator ()(size_t i) {
+    double &operator ()(size_t i)
+    {
         assert(i < Size && "vector.get: argument out of bound!");
         return _data[i];
     }
 
-    double const &operator ()(size_t i) const {
+    double const &operator ()(size_t i) const
+    {
         assert(i < Size && "vector.get: argument out of bound!");
         return _data[i];
     }
 
-    Vector<Size> operator+(Vector<Size> const &v) const {
+    Vector<Size> operator+(Vector<Size> const &v) const
+    {
         Vector<Size> rv;
         for (int i = 0; i < Size; i++) {
             rv._data[i] = _data[i] + v._data[i];
