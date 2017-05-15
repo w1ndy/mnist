@@ -4,9 +4,10 @@
 #include <random>
 #include <functional>
 
-#include "Templates.h"
-#include "Vector.h"
-#include "Matrix.h"
+#include "../Math/Vector.h"
+#include "../Math/Matrix.h"
+
+#include "../Templates/Templates.h"
 
 namespace detail
 {

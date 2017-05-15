@@ -1,9 +1,10 @@
 #pragma once
 
+#include "../Templates/Templates.h"
+
 #include "../Math/Vector.h"
 #include "../Math/Matrix.h"
 
-#include "Templates.h"
 #include "NetworkTypes.h"
 #include "NetworkTraits.h"
 #include "NetworkRunner.h"

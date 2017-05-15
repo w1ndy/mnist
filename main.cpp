@@ -1,4 +1,4 @@
-#include "Network.h"
+#include "Network/Network.h"
 
 int main(int argc, char *argv[])
 {
